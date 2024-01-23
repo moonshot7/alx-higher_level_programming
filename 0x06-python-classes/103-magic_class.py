@@ -1,23 +1,40 @@
 #!/usr/bin/python3
-"""magic class definition"""
+"""Defines a class MagicClass"""
 import math
 
 
 class MagicClass:
-    """magicclass that makes same bytecode as in the task"""
+    """
+    Class that defines properties of MagicClass.
 
+    Attributes:
+        radius: radius.
+    """
     def __init__(self, radius=0):
-        """Initialize class"""
+        """Creates new instances of MagicClass.
+
+        Args:
+            radius: radius.
+
+        Raises:
+            TypeError: radius must be a number .
+        """
         self.__radius = 0
-        if type(radius) is not int and type(radius) is not float:
-            raise TypeError('radius must be a number')
+        if not isinstance(radius, int) and not isinstance(radius, float):
+            raise TypeError("radius must be a number")
         else:
             self.__radius = radius
 
     def area(self):
-        """area function calculates some weird stuff"""
-        return (self.__radius ** 2) * math.pi
+        """Returns area
+
+        Returns: area.
+        """
+        return math.pi * self.__radius ** 2
 
     def circumference(self):
-        """also this func calculate some weird stuff"""
-        return (2 * math.pi) * self.__radius
+        """Returns circumference
+
+        Returns: circumference.
+        """
+        return 2 * math.pi * self.__radius
