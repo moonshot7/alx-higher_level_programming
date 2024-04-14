@@ -1,17 +1,23 @@
 #!/usr/bin/python3
-"""
-    Improve the file model_state.py, and save as relationship_state.py
-"""
+"""Lists states"""
+
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, backref
+
 Base = declarative_base()
-""" Instance """
 
 
 class State(Base):
-    """ Class """
+    """Class representing the states table"""
     __tablename__ = 'states'
-    id = Column(Integer, primary_key=True, nullable=False, unique=True)
+
+    id = Column(Integer, nullable=False, primary_key=True,
+                autoincrement=True, unique=True)
     name = Column(String(128), nullable=False)
-    cities = relationship("City", backref="state")
+
+    cities = relationship(
+        "City",
+        cascade="all, delete-orphan",
+        backref=backref("state", cascade="all"),
+        single_parent=True)
